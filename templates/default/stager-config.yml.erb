@@ -1,0 +1,21 @@
+local_route: <%= node[:ipaddress] %>
+nats_uri: nats://<%= node[:nats_server][:user] %>:<%= node[:nats_server][:password] %>@<%= node[:cloudfoundry_common][:nats_server][:host] %>:<%= node[:cloudfoundry_common][:nats_server][:port] %>/
+
+logging:
+  level: <%= node[:cloudfoundry_stager][:log_level] %>
+  file: <%= node[:cloudfoundry_stager][:log_file] %>
+
+pid_filename: <%= node[:cloudfoundry_stager][:pid_file] %>
+
+max_staging_duration: <%= node[:cloudfoundry_stager][:max_staging_duration] %>
+max_active_tasks: <%= node[:cloudfoundry_stager][:max_active_tasks] %>
+
+queues:
+  - staging
+
+dirs:
+  tmp: <%= node[:cloudfoundry_common][:staging_cache_dir] %>
+
+ruby_path: <%= File.join(node.rbenv.system_prefix, "rbenv", "versions", node.cloudfoundry_common.ruby_1_9_2_version, "bin", "ruby") %>
+
+secure: false
