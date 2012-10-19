@@ -17,15 +17,15 @@
 # limitations under the License.
 #
 
-bin_file = File.join(node.cloudfoundry_common.vcap.install_path, "stager", "bin", "stager")
+bin_file = File.join(node['cloudfoundry_common']['vcap']['install_path'], "stager", "bin", "stager")
 
-template File.join(node.cloudfoundry_common.config_dir, "platform.yml") do
+template File.join(node['cloudfoundry_common']['config_dir'], "platform.yml") do
   source "platform.yml.erb"
-  owner  node.cloudfoundry_common.user
+  owner  node['cloudfoundry_common']['user']
   mode   "0644"
 end
 
 cloudfoundry_component "stager" do
-  env_vars ["PLATFORM_CONFIG=#{File.join(node.cloudfoundry_common.config_dir,'platform.yml')}"]
+  env_vars ["PLATFORM_CONFIG=#{File.join(node['cloudfoundry_common']['config_dir'],'platform.yml')}"]
 end
 
