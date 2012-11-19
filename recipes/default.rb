@@ -17,6 +17,10 @@
 # limitations under the License.
 #
 
+node['cloudfoundry_stager']['provided_native_packages'].each do |pkg|
+  package pkg
+end
+
 bin_file = File.join(node['cloudfoundry_common']['vcap']['install_path'], "stager", "bin", "stager")
 
 template File.join(node['cloudfoundry_common']['config_dir'], "platform.yml") do
